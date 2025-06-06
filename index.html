@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Age Calculator</title>
+  <style>body {
+  background: #7e52e5;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.input-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  display: inline-block;
+  box-shadow: 2px 2px 10px #00000044;
+}
+
+input[type="date"] {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+button {
+  padding: 8px 16px;
+  margin-left: 10px;
+  background: #7e52e5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.result div {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px #00000044;
+}
+
+.result span {
+  font-size: 32px;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>AGE CALCULATOR</h1>
+    <div class="input-box">
+      <input type="date" id="dob">
+      <button onclick="calculateAge()">Calculator</button>
+    </div>
+    <div class="result">
+      <div><span id="years">00</span><p>YEAR</p></div>
+      <div><span id="months">00</span><p>MONTH</p></div>
+      <div><span id="days">00</span><p>DAY</p></div>
+    </div>
+  </div>
+  <script >function calculateAge() {
+  const dob = new Date(document.getElementById("dob").value);
+  const today = new Date();
+
+  let years = today.getFullYear() - dob.getFullYear();
+  let months = today.getMonth() - dob.getMonth();
+  let days = today.getDate() - dob.getDate();
+
+  if (days < 0) {
+    months--;
+    days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  document.getElementById("years").textContent = years < 10 ? "0" + years : years;
+  document.getElementById("months").textContent = months < 10 ? "0" + months : months;
+  document.getElementById("days").textContent = days < 10 ? "0" + days : days;
+}
+</script>
+</body>
+</html>
